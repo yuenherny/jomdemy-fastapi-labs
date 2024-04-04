@@ -1,0 +1,7 @@
+<h1>To Do</h1>
+
+Name = {{ name }}
+<br>
+{% for todo in todos %}
+    {{ todo.title }} <a href="/todo/{{ loop.index0 }}">Delete</a> <br>
+{% endfor %}

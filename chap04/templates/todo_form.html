@@ -1,0 +1,15 @@
+{% extends "home.html" %}
+{% block container %}
+
+{% macro input(name, value="", type="text", size=20) %}
+<form action="/todo" method="post">
+    Title
+    <input type="{{ type }}" name="{{ name }}" size="{{ size }}" value="{{ value }}" placeholder="title">
+    <input type="submit" value="Save">
+</form>
+{% endmacro %}
+
+{{ input("item") }}
+{{ input("item2", "testing", "text", 40) }}
+
+{% endblock %}
