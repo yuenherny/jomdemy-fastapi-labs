@@ -6,7 +6,6 @@ from sqlmodel import Session, select, delete
 from auth.authenticate import authenticate
 
 event_router = APIRouter()
-events = []
 
 @event_router.put("/event-update/{id}")
 async def update_event(
@@ -37,11 +36,18 @@ async def update_event(
 
 @event_router.get("/", response_model=List[Event])
 async def retrieve_all_events(
+    # token: str,
     session: Session = Depends(get_session),
     # user: str = Depends(authenticate)
 ) -> List[Event]:
+    # if token == "xxxxxxx":
     statement = select(Event)
     return session.exec(statement=statement).all()
+    
+    # raise HTTPException(
+    #     status_code=status.HTTP_401_UNAUTHORIZED,
+    #     detail="Invalid token"
+    # )
 
 
 @event_router.get("/{id}", response_model=Event)

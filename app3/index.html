@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJS Demo</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        Message: {{ message }}
+        <br>
+        No: {{ no }}
+        <button @click="increment">+</button>
+        <button @click="decrement">-</button>
+    </div>
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    "message": "Hello Vue",
+                    no: 0
+                }
+            },
+            methods: {
+                increment() {
+                    this.no++;
+                },
+                decrement() {
+                    this.no--;
+                }
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>

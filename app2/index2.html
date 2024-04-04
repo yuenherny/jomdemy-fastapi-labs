@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>JWT Demo</h1>
+    <script>
+        $(function() {
+            let access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoieWlsb25nbWFAdGVzbGEuY29tIiwiZXhwaXJlIjoxNzEyMjA4NjMyLjMzMjA2M30.-VVMvI_Ma0wIuW3325ovGXjEwKEXYDGP_UJrPVGGaAY";
+            $.ajaxSetup({
+                headers: {
+                "Authorization": "Bearer " + access_token
+                }
+            });
+            $.get("http://localhost:8000/event/1", function(event, status) {
+                console.log(event, status);
+                $("#title").text(event.title);
+                $("#location").text(event.location);
+            })
+        })
+    </script>
+</body>
+</html>
