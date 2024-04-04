@@ -1,6 +1,7 @@
 """ This file will contain the functions required to encode and decode 
 the JWT strings.
 """
+import os
 import time
 from datetime import datetime
 from fastapi import HTTPException, status
@@ -11,12 +12,12 @@ def create_access_token(user: str) -> str:
         "user": user,
         "expire": time.time() + 3600
     }
-    return jwt.encode(payload, key="secret", algorithm="HS256")
+    return jwt.encode(payload, key=os.getenv("SECRET_KEY"), algorithm="HS256")
 
 
 def verify_access_token(token: str) -> bool:
     try:
-        decoded_token = jwt.decode(token, key="secret", algorithms=["HS256"])
+        decoded_token = jwt.decode(token, key=os.getenv("SECRET_KEY"), algorithms=["HS256"])
         expiry = decoded_token.get("expire")
 
         if expiry is None:

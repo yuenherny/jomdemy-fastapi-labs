@@ -1,8 +1,11 @@
 """This will handle connection to database"""
 from sqlmodel import SQLModel, Session, create_engine
-from models.events import Event
+import os
+from dotenv import load_dotenv
 
-database_file = "../planner.db"
+load_dotenv()
+
+database_file = f"../{os.getenv("DB_NAME")}"
 database_connection = f"sqlite:///{database_file}"
 connect_args = {"check_same_thread": False} # only for SQLite
 engine_url = create_engine(database_connection, echo=True)
